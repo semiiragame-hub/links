@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semiira — Links</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --neon-purple: #9146ff;
+            --neon-pink: #ff8fbf;
+            --neon-blue: #00f0ff;
+            --text-white: #ffffff;
+            --text-gray: #888;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 143, 191, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(145, 70, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+            animation: bgPulse 8s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgPulse {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        /* Scan lines effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--neon-pink),
+                #ffffff,
+                var(--neon-pink),
+                #ffffff,
+                var(--neon-pink)
+            );
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .avatar-ring::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: var(--bg-dark);
+            border-radius: 50%;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border: 3px solid var(--bg-dark);
+        }
+
+        .live-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #ff0000;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: livePulse 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
+        }
+
+        .name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, var(--text-white), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .tagline span {
+            color: var(--neon-pink);
+        }
+
+        .bio {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Links Section */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-item {
+            position: relative;
+            text-decoration: none;
+            color: var(--text-white);
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .link-item:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-color: transparent;
+        }
+
+        .link-item:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Platform-specific hover effects */
+        .link-twitch::before {
+            background: linear-gradient(135deg, rgba(145, 70, 255, 0.2), transparent);
+        }
+        .link-twitch:hover {
+            box-shadow: 0 8px 32px -8px rgba(145, 70, 255, 0.5), inset 0 0 0 1px rgba(145, 70, 255, 0.3);
+        }
+
+        .link-youtube::before {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), transparent);
+        }
+        .link-youtube:hover {
+            box-shadow: 0 8px 32px -8px rgba(255, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 0, 0, 0.3);
+        }
+
+        .link-telegram::before {
+            background: linear-gradient(135deg, rgba(0, 136, 204, 0.2), transparent);
+        }
+        .link-telegram:hover {
+            box-shadow: 0 8px 32px -8px rgba(0, 136, 204, 0.5), inset 0 0 0 1px rgba(0, 136, 204, 0.3);
+        }
+
+        .link-tiktok::before {
+            background: linear-gradient(135deg, rgba(255, 0, 80, 0.15), rgba(0, 242, 234, 0.15));
+        }
+        .link-tiktok:hover {
+            box-shadow: 0 8px 32px -8px rgba(255, 0, 80, 0.4), inset 0 0 0 1px rgba(0, 242, 234, 0.3);
+        }
+
+        .link-donate::before {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), transparent);
+        }
+        .link-donate:hover {
+            box-shadow: 0 8px 32px -8px rgba(255, 165, 0, 0.5), inset 0 0 0 1px rgba(255, 165, 0, 0.3);
+        }
+
+        .link-meme::before {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), transparent);
+        }
+        .link-meme:hover {
+            box-shadow: 0 8px 32px -8px rgba(0, 255, 136, 0.5), inset 0 0 0 1px rgba(0, 255, 136, 0.3);
+        }
+
+        .link-item:hover::before {
+            opacity: 1;
+        }
+
+        .link-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .link-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .link-desc {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .link-arrow {
+            color: var(--text-gray);
+            transition: transform 0.3s ease, color 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-item:hover .link-arrow {
+            transform: translateX(4px);
+        }
+
+        .link-twitch:hover .link-arrow { color: var(--neon-purple); }
+        .link-youtube:hover .link-arrow { color: #ff0000; }
+        .link-telegram:hover .link-arrow { color: #0088cc; }
+        .link-tiktok:hover .link-arrow { color: #00f2ea; }
+        .link-donate:hover .link-arrow { color: #ffa500; }
+        .link-meme:hover .link-arrow { color: #00ff88; }
+
+        /* Icon backgrounds */
+        .icon-twitch { background: linear-gradient(135deg, #9146ff, #772ce8); }
+        .icon-youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        .icon-telegram { background: linear-gradient(135deg, #0088cc, #229ed9); }
+        .icon-tiktok { background: linear-gradient(135deg, #000, #25f4ee); }
+        .icon-donate { background: linear-gradient(135deg, #f57c00, #ff9800); }
+        .icon-meme { background: linear-gradient(135deg, #00c853, #00e676); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 36px;
+            padding-top: 20px;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: var(--text-gray);
+            opacity: 0.5;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Animations */
+        .profile, .link-item, .footer {
+            animation: fadeUp 0.6s ease backwards;
+        }
+
+        .profile { animation-delay: 0.1s; }
+        .link-item:nth-child(1) { animation-delay: 0.15s; }
+        .link-item:nth-child(2) { animation-delay: 0.2s; }
+        .link-item:nth-child(3) { animation-delay: 0.25s; }
+        .link-item:nth-child(4) { animation-delay: 0.3s; }
+        .link-item:nth-child(5) { animation-delay: 0.35s; }
+        .link-item:nth-child(6) { animation-delay: 0.4s; }
+        .footer { animation-delay: 0.5s; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .name { font-size: 36px; }
+            .avatar-wrapper { width: 100px; height: 100px; }
+            .avatar { width: 100px; height: 100px; }
+            .link-item { padding: 14px 16px; }
+            .link-icon { width: 38px; height: 38px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <div class="avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <img src="avatar.png" alt="Semiira" class="avatar">
+                <!-- Раскомментируй если стримишь: -->
+                <!-- <div class="live-badge">Live</div> -->
+            </div>
+            <h1 class="name">SEMIIRA</h1>
+            <p class="tagline">Стример <span>•</span> Геймер <span>•</span> Контент</p>
+            <p class="bio">Стримлю игры и создаю контент 🎮</p>
+        </div>
+
+        <div class="links">
+            <a href="https://www.twitch.tv/semiira_game" class="link-item link-twitch" target="_blank" rel="noopener">
+                <div class="link-icon icon-twitch">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                    </svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Twitch</div>
+                    <div class="link-desc">Смотри стримы в прямом эфире</div>
+                </div>
+                <div class="link-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/@Semiira_game/videos" class="link-item link-youtube" target="_blank" rel="noopener">
+                <div class="link-icon icon-youtube">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">YouTube</div>
+                    <div class="link-desc">Видео и нарезки со стримов</div>
+                </div>
+                <div class="link-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <a href="https://t.me/semiira_game" class="link-item link-telegram" target="_blank" rel="noopener">
+                <div class="link-icon icon-telegram">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Telegram</div>
+                    <div class="link-desc">Новости и общение</div>
+                </div>
+                <div class="link-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <a href="https://www.tiktok.com/@semiira_game4" class="link-item link-tiktok" target="_blank" rel="noopener">
+                <div class="link-icon icon-tiktok">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                    </svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">TikTok</div>
+                    <div class="link-desc">Короткие видео и клипы</div>
+                </div>
+                <div class="link-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <a href="https://www.donationalerts.com/r/semiira_games" class="link-item link-donate" target="_blank" rel="noopener">
+                <div class="link-icon icon-donate">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">DonationAlerts</div>
+                    <div class="link-desc">Поддержать донатом 💜</div>
+                </div>
+                <div class="link-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <a href="https://memealerts.com/6970f13eaea85cd701a75e4a" class="link-item link-meme" target="_blank" rel="noopener">
+                <div class="link-icon icon-meme">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                        <line x1="9" y1="9" x2="9.01" y2="9"/>
+                        <line x1="15" y1="9" x2="15.01" y2="9"/>
+                    </svg>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">MemeAlerts</div>
+                    <div class="link-desc">Отправь мем на стрим 😂</div>
+                </div>
+                <div class="link-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p class="footer-text">Semiira © 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
